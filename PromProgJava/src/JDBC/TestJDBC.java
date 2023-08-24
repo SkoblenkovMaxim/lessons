@@ -3,11 +3,11 @@ package src.JDBC;
 import java.sql.*;
 
 public class TestJDBC{
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         String url = "jdbc:postgresql://127.0.0.1:5432/work";
         String user = "postgres";
         String password = "9Luck_Maks!_%";
-        Connection connection;
+        Connection connection = null;
         //Загружаем драйвер
         Class.forName("org.postgresql.Driver");
         try{
@@ -37,7 +37,10 @@ public class TestJDBC{
             }
         } catch (Exception e){
             e.printStackTrace();
-          }
+          } finally {
+            assert connection != null;
+            connection.close();
+        }
     }
 
 }
